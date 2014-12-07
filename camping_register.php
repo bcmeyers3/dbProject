@@ -49,7 +49,7 @@
 				} else 
 					echo "Connected.";
 				$query = mysqli_query($c,"SELECT Username FROM Members WHERE Username = '$username'");
-					
+					printf("Select returned %d rows.\n", mysqli_num_rows($query));
 					if(mysqli_num_rows($query) == 0){
 					 header('Location: http://people.eecs.ku.edu/~abenway/camping_home.html');
 					 $x = mysqli_query($c,"INSERT INTO Members (Username, Name, Password) VALUES ('$username', '$name', '$password')"); 

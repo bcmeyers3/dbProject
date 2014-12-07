@@ -33,23 +33,22 @@
 	<?php
 		Session_start();
 			if ($_SERVER['REQUEST_METHOD']=='POST') {
-				$username = $_GET["username"];
-				$password = $_GET["passwordInput"];
+				$username = $_POST["username"];
+				$password = $_POST["passwordInput"];
 				$err = array();
 				
 				if (empty($username))
 					$err[] = "Username is required";
 			
-				$c=mysqli_connect("mysql.eecs.ku.edu", "bmeyers", "bmeyers", "bmeyers"); 
+				$c = mysqli_connect("mysql.eecs.ku.edu", "bmeyers", "bmeyers", "bmeyers"); 
 				
 				if (mysqli_connect_errno($c)) { 
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				}
 				$query = mysqli_query($c,"SELECT Username FROM Members WHERE Username = '$username'");
-					echo "New record created successfully. Last inserted ID is: " . $query;
 					if(mysqli_num_rows($query) == 0){
 					 echo "<div align='center'>Not valid. Please Register.</div>";
-					} else { echo "";
+					} else {
 					$pass = mysqli_query($c,"SELECT Password FROM Members WHERE Username = '$username'");
 					//mysqli_fetch_array($query) or die(mysql-error()); ['Password']
 					//($c,"SELECT PASSWORD FROM UserData WHERE USERRNAME = '$username'");
