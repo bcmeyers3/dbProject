@@ -29,7 +29,7 @@
 	</div>
 	<div id="border1"></div>
 	<div class="background">
-	<div class="transbox">
+	<div class="login">
 	<?php
 		Session_start();
 			if ($_SERVER['REQUEST_METHOD']=='POST') {
@@ -40,30 +40,33 @@
 				if (empty($username))
 					$err[] = "Username is required";
 			
-				$c = mysqli_connect("mysql.eecs.ku.edu", "bmeyers", "bmeyers", "bmeyers"); 
+				$c=mysqli_connect("mysql.eecs.ku.edu", "bmeyers", "bmeyers", "bmeyers"); 
 				
 				if (mysqli_connect_errno($c)) { 
 					echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				}
-				$query = mysqli_query($c,"SELECT Username FROM Members WHERE Username = '$username'");
+		
+					$query = mysqli_query($c,"SELECT Username FROM Members WHERE Username = '$username'");
+					$result = mysqli_query($query);
+					
 					if(mysqli_num_rows($query) == 0){
-					 echo "<div align='center'>Not valid. Please Register.</div>";
-					} else {
-					$pass = mysqli_query($c,"SELECT Password FROM Members WHERE Username = '$username'");
-					//mysqli_fetch_array($query) or die(mysql-error()); ['Password']
+					 echo "<div align='center'>Not valid. Please SignUp.</div>";
+					}
+					else {
+					$query = mysqli_query($c,"SELECT Password FROM Members WHERE Password = '$password' AND Username = '$username'");
+					$result = mysqli_query($query);
+					//mysqli_fetch_array($query) or die(mysql-error())
 					//($c,"SELECT PASSWORD FROM UserData WHERE USERRNAME = '$username'");
-						if($pass == $password){
-						echo header('Location: http://people.eecs.ku.edu/~abenway/camping_group.html');
+						if(mysqli_num_rows($query) !== 0){
+						echo header('Location: http://people.eecs.ku.edu/~abenway/camping_home.html');
 						}
 						else { 
 						echo"<div align='center'>Invalid Password</div>";
 							}		
 					}
 					mysqli_close($c);
-				} else {
-				$form['username'] = $form['passwordInput'] = '';
-				}
-			
+					} else {
+			}
 	?>
 	<form name="signupForm" onSubmit="return validateForm()" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post"  class="bootstrap-frm">
 		<h1>Login
@@ -75,7 +78,7 @@
 		</label>
 		<label>
 			<span>Password: </span>
-			<input id="passwordInput" type="text" name="passwordInput"/>
+			<input id="passwordInput" type="password" name="passwordInput"/>
 		</label>
 		<label>
 			<span>&nbsp;</span>

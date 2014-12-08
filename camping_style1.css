@@ -93,14 +93,28 @@ height: 750px;
   display: inline-block;
   height: auto;
   padding: 25px;
-  margin: 35px auto;
+  margin: 30px auto;
   background: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 20px;
   background: rgba(255, 255, 255, .9);
 }
 
-/* #### bootstrap Form #### */
+.login {
+  width: 700px;
+  display: inline-block;
+  height: auto;
+  padding: 25px;
+  margin: 140px auto;
+  background: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 20px;
+  background: rgba(255, 255, 255, .9);
+}
+
+/* #### bootstrap Form                                      ####
+   #### Login/Register format used from the link below      ####
+   #### http://www.sanwebe.com/2013/10/css-html-form-styles #### */
 .bootstrap-frm {
     margin-left:auto;
     margin-right:auto;
@@ -159,7 +173,6 @@ height: 750px;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-
 .bootstrap-frm textarea{
     height:100px;
     padding: 0px;
